@@ -3,10 +3,12 @@
 @tailwind utilities;
 
 body {
-  width: 380px;
-  height: 560px;
-  overflow: hidden;
+  min-height: 100vh;
+  min-width: 380px;
   background-color: var(--tw-colors-bg, #0A0A0F);
   margin: 0;
   padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -6,12 +6,7 @@
   "permissions": ["activeTab", "scripting", "storage"],
   "host_permissions": ["<all_urls>"],
   "action": {
-    "default_popup": "src/popup/index.html",
-    "default_icon": {
-      "16": "public/icons/icon16.png",
-      "48": "public/icons/icon48.png",
-      "128": "public/icons/icon128.png"
-    }
+    "default_popup": "src/popup/index.html"
   },
   "background": {
     "service_worker": "src/background/service_worker.ts",

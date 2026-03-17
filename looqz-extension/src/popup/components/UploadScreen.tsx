@@ -8,8 +8,9 @@ export default function UploadScreen() {
   const tryOn = useTryOn();
   const productImageUrl = useTryOnStore((s) => s.productImageUrl);
   const userImageBlob = useTryOnStore((s) => s.userImageBlob);
+  const userImagePreviewUrl = useTryOnStore((s) => s.userImagePreviewUrl);
   
-  const isReady = !!productImageUrl && !!userImageBlob;
+  const isReady = !!productImageUrl && (!!userImageBlob || !!userImagePreviewUrl);
 
   return (
     <div className="flex flex-col h-full w-full p-4">

@@ -95,7 +95,15 @@ export default function PhotoUploader() {
       </div>
 
       <div
-        onClick={() => fileInputRef.current?.click()}
+        onClick={() => {
+          // Chrome popups automatically close when a file browser dialog opens.
+          // Workaround: if we are in the popup (width < 600px), open the extension in a new tab.
+          if (chrome?.runtime?.getURL && window.innerWidth < 600) {
+            window.open(chrome.runtime.getURL("src/popup/index.html"), "_blank");
+          } else {
+            fileInputRef.current?.click();
+          }
+        }}
         className={`relative h-[120px] rounded-card border-2 flex flex-col items-center justify-center cursor-pointer transition-all duration-200 overflow-hidden ${
           isDragging
             ? "border-primary bg-elevated"
@@ -107,6 +115,7 @@ export default function PhotoUploader() {
           ref={fileInputRef}
           className="hidden"
           accept={ACCEPTED_IMAGE_TYPES.join(",")}
+          onClick={(e) => e.stopPropagation()}
           onChange={(e) => {
             if (e.target.files && e.target.files.length > 0) {
               handleFile(e.target.files[0]);

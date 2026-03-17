@@ -14,7 +14,7 @@ export default function App() {
   useProductImage();
 
   return (
-    <div className="w-[380px] h-[560px] bg-bg text-text-primary font-sans overflow-hidden flex flex-col">
+    <div className="w-[380px] h-[560px] bg-bg text-text-primary font-sans overflow-hidden flex flex-col relative shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)] sm:rounded-2xl sm:border sm:border-border sm:my-8 bg-[#0A0A0F]">
       <AnimatePresence mode="wait">
         {step === "detecting"  && <motion.div key="detecting" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.2 }} className="flex-1 overflow-hidden"><DetectingScreen /></motion.div>}
         {step === "upload"     && <motion.div key="upload" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.2 }} className="flex-1 overflow-hidden flex flex-col"><UploadScreen /></motion.div>}
