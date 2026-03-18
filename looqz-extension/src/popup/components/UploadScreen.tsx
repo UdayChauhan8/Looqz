@@ -13,15 +13,15 @@ export default function UploadScreen() {
   const isReady = !!productImageUrl && (!!userImageBlob || !!userImagePreviewUrl);
 
   return (
-    <div className="flex flex-col h-full w-full p-4">
+    <div className="flex flex-col flex-1 w-full p-4 min-h-0">
       <StepIndicator currentStep={1} />
       
-      <div className="text-center mb-6 mt-2">
+      <div className="text-center mb-6 mt-2 shrink-0">
         <h1 className="font-display text-[22px] text-text-primary m-0">Virtual Try-On</h1>
         <p className="text-[13px] text-text-secondary mt-1">Try this on yourself in seconds</p>
       </div>
 
-      <div className="flex-1 flex flex-col space-y-6">
+      <div className="flex-1 flex flex-col space-y-6 overflow-y-auto min-h-0 pb-4">
         <ProductImageCard />
         <PhotoUploader />
       </div>

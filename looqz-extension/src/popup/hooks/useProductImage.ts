@@ -18,13 +18,24 @@ export function useProductImage() {
           setUserImage(blob, previewUrl);
         }
 
-        // Step 2: Get product image from active tab
+        // Step 2: Get product image from original tab
         if (chrome?.tabs) {
-          const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+          const urlParams = new URLSearchParams(window.location.search);
+          const tabIdParam = urlParams.get("tabId");
+          let targetTabId: number | undefined;
+
+          if (tabIdParam) {
+            targetTabId = parseInt(tabIdParam, 10);
+          } else {
+            const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+            if (tabs && tabs.length > 0) {
+              targetTabId = tabs[0].id;
+            }
+          }
           
-          if (tabs && tabs.length > 0 && tabs[0].id) {
+          if (targetTabId) {
             try {
-              const response = await chrome.tabs.sendMessage(tabs[0].id, { type: "GET_PRODUCT_IMAGE" });
+              const response = await chrome.tabs.sendMessage(targetTabId, { type: "GET_PRODUCT_IMAGE" });
               if (mounted && response?.url) {
                 setProductImageUrl(response.url);
               } else if (mounted) {

@@ -8,6 +8,7 @@ export default function ResultScreen() {
   const productImageUrl = useTryOnStore((s) => s.productImageUrl);
   const resultImageUrl = useTryOnStore((s) => s.resultImageUrl);
   const resultImages = useTryOnStore((s) => s.resultImages);
+  const userImagePreviewUrl = useTryOnStore((s) => s.userImagePreviewUrl);
   const tryOn = useTryOn();
   
   const [sliderPos, setSliderPos] = useState(50);
@@ -124,21 +125,29 @@ export default function ResultScreen() {
         {/* Polarized reveal layer simulated via saturate animation */}
         <div className="absolute inset-0 w-full h-full animate-[saturate-in_600ms_forwards]">
           
-          {/* Base: Try-on result */}
-          <img 
-            src={activeImageUrl} 
-            alt="Try-on Result" 
-            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          {/* Base layer: Try-on Result (After) */}
+          <div 
+            className="absolute inset-0 w-full h-full bg-surface"
             style={{ clipPath: `inset(0 0 0 ${sliderPos}%)` }}
-          />
+          >
+            <img 
+              src={activeImageUrl} 
+              alt="Try-on Result" 
+              className="w-full h-full object-contain pointer-events-none"
+            />
+          </div>
           
-          {/* Overlay: Original Product */}
-          <img 
-            src={productImageUrl || ""} 
-            alt="Original Product" 
-            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          {/* Overlay layer: Original User Photo (Before) */}
+          <div 
+            className="absolute inset-0 w-full h-full bg-surface border-r border-white/20"
             style={{ clipPath: `inset(0 ${100 - sliderPos}% 0 0)` }}
-          />
+          >
+            <img 
+              src={userImagePreviewUrl || ""} 
+              alt="Original Photo" 
+              className="w-full h-full object-contain pointer-events-none"
+            />
+          </div>
         
         </div>
 

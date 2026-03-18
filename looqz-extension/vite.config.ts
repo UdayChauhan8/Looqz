@@ -8,4 +8,11 @@ export default defineConfig({
     react(),
     crx({ manifest }),
   ],
+  build: {
+    rollupOptions: {
+      input: {
+        popup: "src/popup/index.html",
+      },
+    },
+  },
 });
