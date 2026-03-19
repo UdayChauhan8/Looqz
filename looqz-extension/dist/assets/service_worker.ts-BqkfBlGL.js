@@ -1,1 +1,0 @@
-chrome.runtime.onMessage.addListener(e=>{e.type==="SET_BADGE"&&(e.text!==void 0&&chrome.action.setBadgeText({text:e.text}),e.color&&chrome.action.setBadgeBackgroundColor({color:e.color}))});chrome.action.onClicked.addListener(e=>{e.id?chrome.tabs.create({url:`src/popup/index.html?tabId=${e.id}`}):chrome.tabs.create({url:"src/popup/index.html"})});

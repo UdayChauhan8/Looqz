@@ -6,7 +6,8 @@
   "permissions": [
     "activeTab",
     "scripting",
-    "storage"
+    "storage",
+    "tabs"
   ],
   "host_permissions": [
     "<all_urls>"
@@ -19,7 +20,8 @@
   "content_scripts": [
     {
       "js": [
-        "assets/extractProductImage.ts-loader--Ihbg0KP.js"
+        "assets/extractProductImage.ts-loader--Ihbg0KP.js",
+        "assets/popupOverlay.ts-loader-JH4w3gd2.js"
       ],
       "matches": [
         "<all_urls>"
@@ -34,7 +36,8 @@
       ],
       "resources": [
         "assets/*",
-        "assets/extractProductImage.ts-1gzlAw_L.js"
+        "assets/extractProductImage.ts-1gzlAw_L.js",
+        "assets/popupOverlay.ts-BxiFdQIR.js"
       ],
       "use_dynamic_url": false
     }

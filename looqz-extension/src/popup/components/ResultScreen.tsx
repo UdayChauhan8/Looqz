@@ -5,7 +5,6 @@ import { useTryOnStore } from "../store/useTryOnStore";
 import { useTryOn } from "../hooks/useTryOn";
 
 export default function ResultScreen() {
-  const productImageUrl = useTryOnStore((s) => s.productImageUrl);
   const resultImageUrl = useTryOnStore((s) => s.resultImageUrl);
   const resultImages = useTryOnStore((s) => s.resultImages);
   const userImagePreviewUrl = useTryOnStore((s) => s.userImagePreviewUrl);

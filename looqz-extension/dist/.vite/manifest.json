@@ -1,6 +1,6 @@
 {
   "../../../../../@crx/manifest": {
-    "file": "assets/crx-manifest.js-DX2-wY_3.js",
+    "file": "assets/crx-manifest.js-10DIQAA_.js",
     "name": "crx-manifest.js",
     "src": "../../../../../@crx/manifest",
     "isEntry": true
@@ -9,8 +9,12 @@
     "file": "assets/extractProductImage.ts-loader--Ihbg0KP.js",
     "src": "extractProductImage.ts-loader.js"
   },
+  "popupOverlay.ts-loader.js": {
+    "file": "assets/popupOverlay.ts-loader-JH4w3gd2.js",
+    "src": "popupOverlay.ts-loader.js"
+  },
   "src/background/service_worker.ts": {
-    "file": "assets/service_worker.ts-BqkfBlGL.js",
+    "file": "assets/service_worker.ts-D2qlJWUT.js",
     "name": "service_worker.ts",
     "src": "src/background/service_worker.ts",
     "isEntry": true
@@ -21,13 +25,22 @@
     "src": "src/content/extractProductImage.ts",
     "isEntry": true
   },
+  "src/content/popupOverlay.ts": {
+    "file": "assets/popupOverlay.ts-BxiFdQIR.js",
+    "name": "popupOverlay.ts",
+    "src": "src/content/popupOverlay.ts",
+    "isEntry": true,
+    "imports": [
+      "src/content/extractProductImage.ts"
+    ]
+  },
   "src/popup/index.html": {
-    "file": "assets/popup-Cc3QEVru.js",
+    "file": "assets/popup-C9gb4sRd.js",
     "name": "popup",
     "src": "src/popup/index.html",
     "isEntry": true,
     "css": [
-      "assets/popup-DGm3nRrw.css"
+      "assets/popup-B-ib26ig.css"
     ]
   }
 }

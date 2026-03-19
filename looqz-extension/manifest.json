@@ -3,7 +3,7 @@
   "name": "Looqz — Virtual Try-On",
   "version": "1.0.0",
   "description": "Try on any clothing product instantly using AI",
-  "permissions": ["activeTab", "scripting", "storage"],
+  "permissions": ["activeTab", "scripting", "storage", "tabs"],
   "host_permissions": ["<all_urls>"],
   "action": {},
   "background": {
@@ -13,7 +13,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["src/content/extractProductImage.ts"],
+      "js": ["src/content/extractProductImage.ts", "src/content/popupOverlay.ts"],
       "run_at": "document_idle"
     }
   ],
