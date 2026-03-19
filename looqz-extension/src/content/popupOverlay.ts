@@ -1200,12 +1200,47 @@ async function downloadResult(url: string) {
 
 async function shareResult(url: string) {
   if (!url) return;
+
+  // Try native share first (mobile / PWA contexts)
   if (navigator.share) {
     try {
       await navigator.share({ title: 'Looqz Virtual Try-On', text: 'Check out this virtual try-on!', url });
-    } catch (_) {}
-  } else {
+      return;
+    } catch (_) {
+      // User cancelled or not supported — fall through to copy
+    }
+  }
+
+  // Copy to clipboard with multiple fallbacks
+  let copied = false;
+  try {
     await navigator.clipboard.writeText(url);
+    copied = true;
+  } catch (_) {
+    // clipboard API may fail in content scripts — use execCommand fallback
+    try {
+      const textarea = document.createElement('textarea');
+      textarea.value = url;
+      textarea.style.cssText = 'position:fixed;left:-9999px;top:-9999px;opacity:0;';
+      document.body.appendChild(textarea);
+      textarea.select();
+      copied = document.execCommand('copy');
+      document.body.removeChild(textarea);
+    } catch (_) {}
+  }
+
+  // Visual feedback on the share button
+  const shareBtn = shadowRoot?.querySelector('.looqz-btn-grid .looqz-btn-secondary:last-child') as HTMLButtonElement | null;
+  if (shareBtn) {
+    const original = shareBtn.textContent;
+    shareBtn.textContent = copied ? '✓ Copied!' : '✗ Failed';
+    shareBtn.style.borderColor = copied ? COLORS.success : COLORS.error;
+    shareBtn.style.color = copied ? COLORS.success : COLORS.error;
+    setTimeout(() => {
+      shareBtn.textContent = original;
+      shareBtn.style.borderColor = '';
+      shareBtn.style.color = '';
+    }, 2000);
   }
 }
 
