@@ -1,7 +1,7 @@
 import { extractProductImageUrl } from './extractProductImage';
 
 // ─── Configuration ───────────────────────────────────────────────────────────
-const BACKEND_URL = 'http://localhost:8000';
+const BACKEND_URL = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_BACKEND_URL) || 'http://localhost:8000';
 const SIDEBAR_WIDTH = 380;
 
 // ─── Design Tokens (matching tailwind.config.ts) ─────────────────────────────
@@ -1192,7 +1192,8 @@ async function downloadResult(url: string) {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    URL.revokeObjectURL(href);
+    // Delay revoking so the browser has time to start the download
+    setTimeout(() => URL.revokeObjectURL(href), 10000);
   } catch (e) {
     console.error('Download failed', e);
   }

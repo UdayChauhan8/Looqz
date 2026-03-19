@@ -9,7 +9,8 @@
     "test": "vitest run tests/unit",
     "test:e2e": "playwright test",
     "lint": "eslint src --ext ts,tsx",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "package": "npm run build && cd dist && zip -r ../looqz-extension.zip . && echo 'Packaged: looqz-extension.zip'"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "latest",

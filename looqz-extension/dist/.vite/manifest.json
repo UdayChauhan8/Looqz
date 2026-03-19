@@ -10,7 +10,7 @@
     "src": "extractProductImage.ts-loader.js"
   },
   "popupOverlay.ts-loader.js": {
-    "file": "assets/popupOverlay.ts-loader-BoJ6d1wM.js",
+    "file": "assets/popupOverlay.ts-loader-D98vM0is.js",
     "src": "popupOverlay.ts-loader.js"
   },
   "src/background/service_worker.ts": {
@@ -26,7 +26,7 @@
     "isEntry": true
   },
   "src/content/popupOverlay.ts": {
-    "file": "assets/popupOverlay.ts-CPiQHKYm.js",
+    "file": "assets/popupOverlay.ts-Cszg1IBR.js",
     "name": "popupOverlay.ts",
     "src": "src/content/popupOverlay.ts",
     "isEntry": true,
