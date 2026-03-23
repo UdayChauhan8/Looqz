@@ -3,7 +3,7 @@
   "name": "Looqz — Virtual Try-On",
   "short_name": "Looqz",
   "version": "1.0.0",
-  "description": "Try on any clothing product instantly using AI. Browse any shopping site, click the extension, upload your photo, and see how clothes look on you!",
+  "description": "Try on any clothing product instantly using AI. Browse shopping sites, upload your photo, and see your new look!",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",

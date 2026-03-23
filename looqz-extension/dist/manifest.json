@@ -1,13 +1,18 @@
 {
   "manifest_version": 3,
   "name": "Looqz — Virtual Try-On",
+  "short_name": "Looqz",
   "version": "1.0.0",
-  "description": "Try on any clothing product instantly using AI",
+  "description": "Try on any clothing product instantly using AI. Browse shopping sites, upload your photo, and see your new look!",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
   "permissions": [
     "activeTab",
     "scripting",
-    "storage",
-    "tabs"
+    "storage"
   ],
   "host_permissions": [
     "<all_urls>"
@@ -21,7 +26,7 @@
     {
       "js": [
         "assets/extractProductImage.ts-loader--Ihbg0KP.js",
-        "assets/popupOverlay.ts-loader-D98vM0is.js"
+        "assets/popupOverlay.ts-loader-DZJQNbu2.js"
       ],
       "matches": [
         "<all_urls>"
@@ -37,7 +42,7 @@
       "resources": [
         "assets/*",
         "assets/extractProductImage.ts-1gzlAw_L.js",
-        "assets/popupOverlay.ts-Cszg1IBR.js"
+        "assets/popupOverlay.ts-bmqNlaOu.js"
       ],
       "use_dynamic_url": false
     }

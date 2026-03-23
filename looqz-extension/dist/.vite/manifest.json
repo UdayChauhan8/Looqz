@@ -1,6 +1,6 @@
 {
   "../../../../../@crx/manifest": {
-    "file": "assets/crx-manifest.js-10DIQAA_.js",
+    "file": "assets/crx-manifest.js-D8KSLudG.js",
     "name": "crx-manifest.js",
     "src": "../../../../../@crx/manifest",
     "isEntry": true
@@ -10,7 +10,7 @@
     "src": "extractProductImage.ts-loader.js"
   },
   "popupOverlay.ts-loader.js": {
-    "file": "assets/popupOverlay.ts-loader-D98vM0is.js",
+    "file": "assets/popupOverlay.ts-loader-DZJQNbu2.js",
     "src": "popupOverlay.ts-loader.js"
   },
   "src/background/service_worker.ts": {
@@ -26,7 +26,7 @@
     "isEntry": true
   },
   "src/content/popupOverlay.ts": {
-    "file": "assets/popupOverlay.ts-Cszg1IBR.js",
+    "file": "assets/popupOverlay.ts-bmqNlaOu.js",
     "name": "popupOverlay.ts",
     "src": "src/content/popupOverlay.ts",
     "isEntry": true,
