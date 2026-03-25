@@ -9,11 +9,30 @@ export default function UploadScreen() {
   const productImageUrl = useTryOnStore((s) => s.productImageUrl);
   const userImageBlob = useTryOnStore((s) => s.userImageBlob);
   const userImagePreviewUrl = useTryOnStore((s) => s.userImagePreviewUrl);
+  const setApiKey = useTryOnStore((s) => s.setApiKey);
+  const setStep = useTryOnStore((s) => s.setStep);
   
   const isReady = !!productImageUrl && (!!userImageBlob || !!userImagePreviewUrl);
 
+  const handleDisconnect = () => {
+    if (window.confirm("Are you sure you want to disconnect your API Key?")) {
+      setApiKey(null);
+      setStep("apiKeySetup");
+    }
+  };
+
   return (
-    <div className="flex flex-col flex-1 w-full p-4 min-h-0">
+    <div className="flex flex-col flex-1 w-full p-4 min-h-0 relative">
+      <button 
+        onClick={handleDisconnect}
+        className="absolute top-4 right-4 text-text-secondary hover:text-white transition-colors"
+        title="Disconnect API Key"
+      >
+        <svg className="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+        </svg>
+      </button>
+
       <StepIndicator currentStep={1} />
       
       <div className="text-center mb-6 mt-2 shrink-0">

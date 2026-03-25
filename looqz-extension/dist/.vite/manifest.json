@@ -10,7 +10,7 @@
     "src": "extractProductImage.ts-loader.js"
   },
   "popupOverlay.ts-loader.js": {
-    "file": "assets/popupOverlay.ts-loader-DZJQNbu2.js",
+    "file": "assets/popupOverlay.ts-loader-CuB6i7BU.js",
     "src": "popupOverlay.ts-loader.js"
   },
   "src/background/service_worker.ts": {
@@ -26,7 +26,7 @@
     "isEntry": true
   },
   "src/content/popupOverlay.ts": {
-    "file": "assets/popupOverlay.ts-bmqNlaOu.js",
+    "file": "assets/popupOverlay.ts-uEA0dIVl.js",
     "name": "popupOverlay.ts",
     "src": "src/content/popupOverlay.ts",
     "isEntry": true,
@@ -35,12 +35,12 @@
     ]
   },
   "src/popup/index.html": {
-    "file": "assets/popup-C9gb4sRd.js",
+    "file": "assets/popup-NlUp_GbU.js",
     "name": "popup",
     "src": "src/popup/index.html",
     "isEntry": true,
     "css": [
-      "assets/popup-B-ib26ig.css"
+      "assets/popup-CCXMTIC1.css"
     ]
   }
 }

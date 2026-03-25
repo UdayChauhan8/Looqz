@@ -76,6 +76,8 @@ app.post('/try-on', upload.single('user_image'), async (req, res) => {
     const headers = {
       'Authorization': `Bearer ${LOOQZ_API_KEY}`,
       'Content-Type': 'application/json',
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+      'Accept': 'application/json, text/plain, */*'
     };
 
     // Set domain headers (required by Looqz API for key validation)

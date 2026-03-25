@@ -1,10 +1,11 @@
 import { create } from "zustand";
 
-export type Step = "detecting" | "upload" | "generating" | "result" | "error";
+export type Step = "apiKeySetup" | "detecting" | "upload" | "generating" | "result" | "error";
 
 interface TryOnStore {
   // State
   step: Step;
+  apiKey: string | null;
   productImageUrl: string | null;
   userImageBlob: Blob | null;
   userImagePreviewUrl: string | null;
@@ -15,6 +16,7 @@ interface TryOnStore {
 
   // Actions
   setStep: (step: Step) => void;
+  setApiKey: (key: string | null) => void;
   setProductImageUrl: (url: string | null) => void;
   setUserImage: (blob: Blob, previewUrl: string) => void;
   clearUserImage: () => void;
@@ -25,7 +27,8 @@ interface TryOnStore {
 }
 
 export const useTryOnStore = create<TryOnStore>((set) => ({
-  step: "detecting",
+  step: "apiKeySetup", // Default to setup, will change to detecting if key exists
+  apiKey: null,
   productImageUrl: null,
   userImageBlob: null,
   userImagePreviewUrl: null,
@@ -35,6 +38,14 @@ export const useTryOnStore = create<TryOnStore>((set) => ({
   isLoading: false,
 
   setStep: (step) => set({ step }),
+  setApiKey: (key) => {
+    set({ apiKey: key });
+    if (key) {
+      chrome.storage.local.set({ looqz_api_key: key });
+    } else {
+      chrome.storage.local.remove(["looqz_api_key"]);
+    }
+  },
   setProductImageUrl: (url) => set({ productImageUrl: url }),
   
   setUserImage: (blob, previewUrl) => {
@@ -83,6 +94,21 @@ export const useTryOnStore = create<TryOnStore>((set) => ({
     resultImages: []
   }),
 }));
+
+export async function initStoreAuth() {
+  try {
+    const data = await chrome.storage.local.get(["looqz_api_key"]);
+    const store = useTryOnStore.getState();
+    if (data.looqz_api_key) {
+      store.setApiKey(data.looqz_api_key);
+      store.setStep("detecting"); // Move to normal flow
+    } else {
+      store.setStep("apiKeySetup");
+    }
+  } catch (e) {
+    console.error("Failed to load API key", e);
+  }
+}
 
 export async function rehydrateUserImage(): Promise<{ blob: Blob | null, previewUrl: string | null }> {
   try {

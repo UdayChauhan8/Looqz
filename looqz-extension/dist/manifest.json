@@ -26,7 +26,7 @@
     {
       "js": [
         "assets/extractProductImage.ts-loader--Ihbg0KP.js",
-        "assets/popupOverlay.ts-loader-DZJQNbu2.js"
+        "assets/popupOverlay.ts-loader-CuB6i7BU.js"
       ],
       "matches": [
         "<all_urls>"
@@ -42,7 +42,7 @@
       "resources": [
         "assets/*",
         "assets/extractProductImage.ts-1gzlAw_L.js",
-        "assets/popupOverlay.ts-bmqNlaOu.js"
+        "assets/popupOverlay.ts-uEA0dIVl.js"
       ],
       "use_dynamic_url": false
     }
