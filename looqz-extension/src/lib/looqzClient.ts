@@ -1,4 +1,3 @@
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL ?? "http://localhost:8000";
 
 import { useTryOnStore } from "../popup/store/useTryOnStore";
 
@@ -40,29 +39,56 @@ export class LooqzClient {
     userImageBlob: Blob,
     imageCount: 1 | 2 | 3 | 4 = 1,
   ): Promise<TryOnResult> {
-    const form = new FormData();
-    form.append("product_image_url", productImageUrl);
-    form.append("user_image", userImageBlob, "user-photo.jpg");
-    form.append("image_count", String(imageCount));
-
     const apiKey = useTryOnStore.getState().apiKey;
-    const headers: Record<string, string> = {};
-    if (apiKey) {
-      headers["Authorization"] = `Bearer ${apiKey}`;
+    if (!apiKey) {
+      throw new LooqzError(401, "API Key is missing. Please authorize again.");
     }
 
-    const response = await fetch(`${BACKEND_URL}/try-on`, {
+    // 1. Upload the user image to Catbox to get a public URL
+    const uploadForm = new FormData();
+    uploadForm.append("reqtype", "fileupload");
+    uploadForm.append("time", "1h");
+    uploadForm.append("fileToUpload", userImageBlob, "user-photo.jpg");
+
+    let userImageUrl: string;
+    try {
+      const uploadRes = await fetch("https://litterbox.catbox.moe/resources/internals/api.php", {
+        method: "POST",
+        body: uploadForm,
+      });
+
+      if (!uploadRes.ok) {
+        throw new Error(`Image upload failed: ${uploadRes.status}`);
+      }
+      userImageUrl = (await uploadRes.text()).trim();
+    } catch (e) {
+      throw new LooqzError(500, "Failed to upload image securely for processing.");
+    }
+
+    // 2. Call the Looqz Generation API directly using the new user-provided API key
+    const headers: Record<string, string> = {
+      "Authorization": `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+      "Accept": "application/json, text/plain, */*"
+    };
+
+    const looqzPayload = {
+      product_image_url: productImageUrl,
+      user_image_url: userImageUrl,
+      image_count: imageCount,
+    };
+
+    const response = await fetch("https://looqz.in/api/v1/public/generate-image", {
       method: "POST",
       headers,
-      body: form,
-      // Do NOT set Content-Type header; browser will handle it automatically
+      body: JSON.stringify(looqzPayload),
     });
 
-    if (response.status === 401) {
+    if (response.status === 401 || response.status === 403) {
       const store = useTryOnStore.getState();
       store.setApiKey(null);
       store.setStep("apiKeySetup");
-      throw new LooqzError(401, "API Key is invalid or expired. Please authorize again.");
+      throw new LooqzError(response.status, "API Key is invalid or expired. Please authorize again.");
     }
 
     if (!response.ok) {
@@ -73,6 +99,8 @@ export class LooqzClient {
           errorMessage = typeof errJson.detail === "string" 
             ? errJson.detail 
             : JSON.stringify(errJson.detail);
+        } else if (errJson.message) {
+          errorMessage = errJson.message;
         }
       } catch (e) {
         // Fallback if not JSON
